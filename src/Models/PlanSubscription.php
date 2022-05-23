@@ -95,16 +95,16 @@ class PlanSubscription extends Model
      * {@inheritdoc}
      */
     protected $casts = [
-        'subscriber_id' => 'integer',
-        'subscriber_type' => 'string',
-        'plan_id' => 'integer',
-        'slug' => 'string',
-        'trial_ends_at' => 'datetime',
-        'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
-        'cancels_at' => 'datetime',
-        'canceled_at' => 'datetime',
-        'deleted_at' => 'datetime',
+        'subscriber_id'         => 'integer',
+        'subscriber_type'       => 'string',
+        'plan_id'               => 'integer',
+        'slug'                  => 'string',
+        'trial_ends_at'         => 'datetime',
+        'starts_at'             => 'datetime',
+        'ends_at'               => 'datetime',
+        'cancels_at'            => 'datetime',
+        'canceled_at'           => 'datetime',
+        'deleted_at'            => 'datetime',
     ];
 
     /**
@@ -151,8 +151,8 @@ class PlanSubscription extends Model
         $this->mergeRules([
             'name' => 'required|string|strip_tags|max:150',
             'description' => 'nullable|string|max:32768',
-            'slug' => 'required|alpha_dash|max:150|unique:'.config('rinvex.subscriptions.tables.plan_subscriptions').',slug',
-            'plan_id' => 'required|integer|exists:'.config('rinvex.subscriptions.tables.plans').',id',
+            'slug' => 'required|alpha_dash|max:150|unique:' . config('rinvex.subscriptions.tables.plan_subscriptions') . ',slug',
+            'plan_id' => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plans') . ',id',
             'subscriber_id' => 'required|integer',
             'subscriber_type' => 'required|string|strip_tags|max:150',
             'trial_ends_at' => 'nullable|date',
@@ -173,7 +173,7 @@ class PlanSubscription extends Model
         parent::boot();
 
         static::validating(function (self $model) {
-            if (! $model->starts_at || ! $model->ends_at) {
+            if (!$model->starts_at || !$model->ends_at) {
                 $model->setNewPeriod();
             }
         });
@@ -191,9 +191,9 @@ class PlanSubscription extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-                          ->doNotGenerateSlugsOnUpdate()
-                          ->generateSlugsFrom('name')
-                          ->saveSlugsTo('slug');
+            ->doNotGenerateSlugsOnUpdate()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 
     /**
@@ -223,7 +223,7 @@ class PlanSubscription extends Model
      */
     public function active(): bool
     {
-        return ! $this->ended() || $this->onTrial();
+        return !$this->ended() || $this->onTrial();
     }
 
     /**
@@ -233,7 +233,7 @@ class PlanSubscription extends Model
      */
     public function inactive(): bool
     {
-        return ! $this->active();
+        return !$this->active();
     }
 
     /**
@@ -526,7 +526,7 @@ class PlanSubscription extends Model
 
         // If the feature value is zero, let's return false since
         // there's no uses available. (useful to disable countable features)
-        if (! $usage || $usage->expired() || is_null($featureValue) || $featureValue === '0' || $featureValue === 'false') {
+        if (!$usage || $usage->expired() || is_null($featureValue) || $featureValue === '0' || $featureValue === 'false') {
             return false;
         }
 
@@ -545,7 +545,7 @@ class PlanSubscription extends Model
     {
         $usage = $this->usage()->byFeatureSlug($featureSlug)->first();
 
-        return (! $usage || $usage->expired()) ? 0 : $usage->used;
+        return (!$usage || $usage->expired()) ? 0 : $usage->used;
     }
 
     /**

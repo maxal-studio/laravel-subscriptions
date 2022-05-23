@@ -3,11 +3,13 @@
 namespace Rinvex\Subscriptions\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-  use RefreshDatabase;
+  use RefreshDatabase, WithFaker;
 
+  public $model_helper;
   protected function getPackageProviders($app)
   {
     return [\Rinvex\Subscriptions\Providers\SubscriptionsServiceProvider::class];
@@ -26,6 +28,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
   public function setUp(): void
   {
+    $this->model_helper = new ModelHelper();
+
     parent::setUp();
     $this->artisan(
       'migrate',
