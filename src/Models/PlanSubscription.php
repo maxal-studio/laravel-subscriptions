@@ -179,7 +179,7 @@ class PlanSubscription extends Model
         });
 
         static::deleted(function ($subscription) {
-            $subscription->usage()->delete();
+            $subscription->usages()->delete();
         });
     }
 
@@ -211,7 +211,7 @@ class PlanSubscription extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usage(): hasMany
+    public function usages(): hasMany
     {
         return $this->hasMany(config('rinvex.subscriptions.models.plan_subscription_usage'), 'subscription_id', 'id');
     }
@@ -301,7 +301,7 @@ class PlanSubscription extends Model
         // a new billing cycle, the usage data will be cleared.
         if ($this->plan->invoice_interval !== $plan->invoice_interval || $this->plan->invoice_period !== $plan->invoice_period) {
             $this->setNewPeriod($plan->invoice_interval, $plan->invoice_period);
-            $this->usage()->delete();
+            $this->usages()->delete();
         }
 
         // Attach new plan to subscription
@@ -328,7 +328,7 @@ class PlanSubscription extends Model
 
         DB::transaction(function () use ($subscription) {
             // Clear usage data
-            $subscription->usage()->delete();
+            $subscription->usages()->delete();
 
             // Renew period
             $subscription->setNewPeriod();
@@ -459,7 +459,7 @@ class PlanSubscription extends Model
     {
         $feature = $this->plan->features()->where('slug', $featureSlug)->first();
 
-        $usage = $this->usage()->firstOrNew([
+        $usage = $this->usages()->firstOrNew([
             'subscription_id' => $this->getKey(),
             'feature_id' => $feature->getKey(),
         ]);
@@ -495,7 +495,7 @@ class PlanSubscription extends Model
      */
     public function reduceFeatureUsage(string $featureSlug, int $uses = 1): ?PlanSubscriptionUsage
     {
-        $usage = $this->usage()->byFeatureSlug($featureSlug)->first();
+        $usage = $this->usages()->byFeatureSlug($featureSlug)->first();
 
         if (is_null($usage)) {
             return null;
@@ -518,7 +518,7 @@ class PlanSubscription extends Model
     public function canUseFeature(string $featureSlug): bool
     {
         $featureValue = $this->getFeatureValue($featureSlug);
-        $usage = $this->usage()->byFeatureSlug($featureSlug)->first();
+        $usage = $this->usages()->byFeatureSlug($featureSlug)->first();
 
         if ($featureValue === 'true') {
             return true;
@@ -543,7 +543,7 @@ class PlanSubscription extends Model
      */
     public function getFeatureUsage(string $featureSlug): int
     {
-        $usage = $this->usage()->byFeatureSlug($featureSlug)->first();
+        $usage = $this->usages()->byFeatureSlug($featureSlug)->first();
 
         return (!$usage || $usage->expired()) ? 0 : $usage->used;
     }

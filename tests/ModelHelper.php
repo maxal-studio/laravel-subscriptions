@@ -5,9 +5,14 @@ namespace Rinvex\Subscriptions\Tests;
 use Rinvex\Subscriptions\Models\Plan;
 use Rinvex\Subscriptions\Models\PlanFeature;
 use Rinvex\Subscriptions\Models\PlanSubscription;
+use Rinvex\Subscriptions\Models\PlanSubscriptionUsage;
 
 class ModelHelper
 {
+
+  /**
+   * @return Plan
+   */
   public function plan_create(): Plan
   {
     $plan = Plan::create([
@@ -34,6 +39,9 @@ class ModelHelper
     return $plan;
   }
 
+  /**
+   * @return Plan
+   */
   public function free_plan_create(): Plan
   {
     $plan = Plan::create([
@@ -61,6 +69,11 @@ class ModelHelper
   }
 
 
+
+  /**
+   * @param $plan_id
+   * @return PlanFeature
+   */
   public function plan_feature_create($plan_id): PlanFeature
   {
     $plan_feature = PlanFeature::create(
@@ -71,7 +84,7 @@ class ModelHelper
         'description' => 'something',
         'value' => 'something',
         'resettable_period' => 1,
-        'resettable_interval' => 'day',
+        'resettable_interval' => 'month',
         'sort_order' => 1,
       ]
     );
@@ -79,6 +92,10 @@ class ModelHelper
     return $plan_feature;
   }
 
+  /**
+   * @param $plan_id
+   * @return PlanSubscription
+   */
   public function plan_subscription_create($plan_id): PlanSubscription
   {
     $plan_subscription = PlanSubscription::create([
@@ -93,6 +110,23 @@ class ModelHelper
       'ends_at' => now()->addDays(7),
       'cancels_at' => null,
       'canceled_at' => null,
+    ]);
+
+    return $plan_subscription;
+  }
+
+  /**
+   * @param $feature_id
+   * @param $subscription_id
+   * @return PlanSubscriptionUsage
+   */
+  public function plan_subscription_usage_create($feature_id, $subscription_id): PlanSubscriptionUsage
+  {
+    $plan_subscription = PlanSubscriptionUsage::create([
+      'subscription_id'   => $subscription_id,
+      'feature_id'        => $feature_id,
+      'used'              => 1,
+      'valid_until'       => now()->addMonth(1),
     ]);
 
     return $plan_subscription;

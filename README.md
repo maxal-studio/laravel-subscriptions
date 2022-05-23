@@ -218,7 +218,7 @@ $user->planSubscription('main')->reduceFeatureUsage('listings', 2);
 ### Clear The Subscription Usage Data
 
 ```php
-$user->planSubscription('main')->usage()->delete();
+$user->planSubscription('main')->usages()->delete();
 ```
 
 ### Check Subscription Status

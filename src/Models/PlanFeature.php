@@ -161,7 +161,7 @@ class PlanFeature extends Model implements Sortable
         parent::boot();
 
         static::deleted(function ($plan_feature) {
-            $plan_feature->usage()->delete();
+            $plan_feature->usages()->delete();
         });
     }
 
@@ -183,7 +183,7 @@ class PlanFeature extends Model implements Sortable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usage(): HasMany
+    public function usages(): HasMany
     {
         return $this->hasMany(config('rinvex.subscriptions.models.plan_subscription_usage'), 'feature_id', 'id');
     }

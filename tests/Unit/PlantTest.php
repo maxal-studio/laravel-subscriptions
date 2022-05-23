@@ -10,7 +10,7 @@ class PlantTest extends TestCase
   /**
    * @test
    */
-  public function test_plan_creation()
+  public function plan_creation()
   {
     $plan = $this->model_helper->plan_create();
     $this->assertNotNull($plan);

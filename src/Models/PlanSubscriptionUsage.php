@@ -57,11 +57,11 @@ class PlanSubscriptionUsage extends Model
      * {@inheritdoc}
      */
     protected $casts = [
-        'subscription_id' => 'integer',
-        'feature_id' => 'integer',
-        'used' => 'integer',
-        'valid_until' => 'datetime',
-        'deleted_at' => 'datetime',
+        'subscription_id'   => 'integer',
+        'feature_id'        => 'integer',
+        'used'              => 'integer',
+        'valid_until'       => 'datetime',
+        'deleted_at'        => 'datetime',
     ];
 
     /**
@@ -96,8 +96,8 @@ class PlanSubscriptionUsage extends Model
     {
         $this->setTable(config('rinvex.subscriptions.tables.plan_subscription_usage'));
         $this->mergeRules([
-            'subscription_id' => 'required|integer|exists:'.config('rinvex.subscriptions.tables.plan_subscriptions').',id',
-            'feature_id' => 'required|integer|exists:'.config('rinvex.subscriptions.tables.plan_features').',id',
+            'subscription_id' => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plan_subscriptions') . ',id',
+            'feature_id' => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plan_features') . ',id',
             'used' => 'required|integer',
             'valid_until' => 'nullable|date',
         ]);
