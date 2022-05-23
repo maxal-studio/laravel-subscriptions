@@ -297,7 +297,7 @@ class PlanSubscription extends Model
     {
         // If plans does not have the same billing frequency
         // (e.g., invoice_interval and invoice_period) we will update
-        // the billing dates starting today, and sice we are basically creating
+        // the billing dates starting today, and since we are basically creating
         // a new billing cycle, the usage data will be cleared.
         if ($this->plan->invoice_interval !== $plan->invoice_interval || $this->plan->invoice_period !== $plan->invoice_period) {
             $this->setNewPeriod($plan->invoice_interval, $plan->invoice_period);

@@ -13,7 +13,7 @@ class ModelHelper
   /**
    * @return Plan
    */
-  public function plan_create(): Plan
+  public function plan_create(...$attributes): Plan
   {
     $plan = Plan::create([
       'slug' => 'something',
@@ -25,8 +25,8 @@ class ModelHelper
       'currency' => 'USD',
       'trial_period' => 1,
       'trial_interval' => 'month',
-      'invoice_period' => 1,
-      'invoice_interval' => 'month',
+      'invoice_period' => $attributes[0] ?? 1,
+      'invoice_interval' => $attributes[1] ?? 'month',
       'grace_period' => 1,
       'grace_interval' => 'month',
       'prorate_day' => 1,
@@ -115,6 +115,52 @@ class ModelHelper
     return $plan_subscription;
   }
 
+
+  /**
+   * @param $plan_id
+   * @return PlanSubscription
+   */
+  public function plan_subscription_ended_create($plan_id): PlanSubscription
+  {
+    $plan_subscription = PlanSubscription::create([
+      'subscriber_id' => 1,
+      'subscriber_type' => 'App\\User',
+      'plan_id' => $plan_id,
+      'slug' => 'something',
+      'name' => 'something',
+      'description' => 'something',
+      'trial_ends_at' => now()->addDays(7),
+      'starts_at' => now(),
+      'ends_at' => now()->subDays(7),
+      'cancels_at' => null,
+      'canceled_at' => null,
+    ]);
+
+    return $plan_subscription;
+  }
+
+  /**
+   * @param $plan_id
+   * @return PlanSubscription
+   */
+  public function plan_subscription_inactive_create($plan_id): PlanSubscription
+  {
+    $plan_subscription = PlanSubscription::create([
+      'subscriber_id' => 1,
+      'subscriber_type' => 'App\\User',
+      'plan_id' => $plan_id,
+      'slug' => 'something',
+      'name' => 'something',
+      'description' => 'something',
+      'trial_ends_at' => now()->subDays(7),
+      'starts_at' => now(),
+      'ends_at' => now()->subDays(7),
+      'cancels_at' => null,
+      'canceled_at' => null,
+    ]);
+
+    return $plan_subscription;
+  }
   /**
    * @param $feature_id
    * @param $subscription_id
