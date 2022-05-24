@@ -130,7 +130,7 @@ class ModelHelper
       'name' => 'something',
       'description' => 'something',
       'trial_ends_at' => now()->addDays(7),
-      'starts_at' => now(),
+      'starts_at' => now()->subDays(14),
       'ends_at' => now()->subDays(7),
       'cancels_at' => null,
       'canceled_at' => null,
@@ -173,6 +173,23 @@ class ModelHelper
       'feature_id'        => $feature_id,
       'used'              => 1,
       'valid_until'       => now()->addMonth(1),
+    ]);
+
+    return $plan_subscription;
+  }
+
+  /**
+   * @param $feature_id
+   * @param $subscription_id
+   * @return PlanSubscriptionUsage
+   */
+  public function plan_subscription_usage_expired_create($feature_id, $subscription_id): PlanSubscriptionUsage
+  {
+    $plan_subscription = PlanSubscriptionUsage::create([
+      'subscription_id'   => $subscription_id,
+      'feature_id'        => $feature_id,
+      'used'              => 1,
+      'valid_until'       => now()->subMonth(1),
     ]);
 
     return $plan_subscription;

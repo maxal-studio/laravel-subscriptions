@@ -149,17 +149,17 @@ class PlanSubscription extends Model
     {
         $this->setTable(config('rinvex.subscriptions.tables.plan_subscriptions'));
         $this->mergeRules([
-            'name' => 'required|string|strip_tags|max:150',
-            'description' => 'nullable|string|max:32768',
-            'slug' => 'required|alpha_dash|max:150|unique:' . config('rinvex.subscriptions.tables.plan_subscriptions') . ',slug',
-            'plan_id' => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plans') . ',id',
-            'subscriber_id' => 'required|integer',
-            'subscriber_type' => 'required|string|strip_tags|max:150',
-            'trial_ends_at' => 'nullable|date',
-            'starts_at' => 'required|date',
-            'ends_at' => 'required|date',
-            'cancels_at' => 'nullable|date',
-            'canceled_at' => 'nullable|date',
+            'name'              => 'required|string|strip_tags|max:150',
+            'description'       => 'nullable|string|max:32768',
+            'slug'              => 'required|alpha_dash|max:150|unique:' . config('rinvex.subscriptions.tables.plan_subscriptions') . ',slug',
+            'plan_id'           => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plans') . ',id',
+            'subscriber_id'     => 'required|integer',
+            'subscriber_type'   => 'required|string|strip_tags|max:150',
+            'trial_ends_at'     => 'nullable|date',
+            'starts_at'         => 'required|date',
+            'ends_at'           => 'required|date',
+            'cancels_at'        => 'nullable|date',
+            'canceled_at'       => 'nullable|date',
         ]);
 
         parent::__construct($attributes);

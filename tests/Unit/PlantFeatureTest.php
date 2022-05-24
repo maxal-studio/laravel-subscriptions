@@ -2,6 +2,7 @@
 
 namespace Rinvex\Subscriptions\Tests\Unit;
 
+use Rinvex\Subscriptions\Models\Plan;
 use Rinvex\Subscriptions\Models\PlanFeature;
 use Rinvex\Subscriptions\Tests\TestCase;
 
@@ -17,6 +18,21 @@ class PlantFeatureTest extends TestCase
     $this->assertEquals(1, PlanFeature::count());
   }
 
+
+  /**
+   * @test
+   */
+  public function feature_belongs_to_plan()
+  {
+    $plan = $this->model_helper->plan_create();
+    $feature = $this->model_helper->plan_feature_create($plan->id);
+
+    // Method 1: Test by count that a feature has a parent relationship with plan
+    $this->assertEquals(1, $feature->plan->count());
+
+    // Method 2: 
+    $this->assertInstanceOf(Plan::class, $feature->plan);
+  }
 
   /**
    * @test
