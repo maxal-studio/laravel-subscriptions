@@ -1,18 +1,14 @@
-# Rinvex Subscriptions
-
-⚠️ This package is abandoned and no longer maintained. No replacement package was suggested. ⚠️
-
-👉 If you are interested to step on as the main maintainer of this package, please [reach out to me](https://twitter.com/omranic)!
+# MaxAl Subscriptions
 
 ---
 
-**Rinvex Subscriptions** is a flexible plans and subscription management system for Laravel, with the required tools to run your SAAS like services efficiently. It's simple architecture, accompanied by powerful underlying to afford solid platform for your business.
+**MaxAl Subscriptions** is a flexible plans and subscription management system for Laravel, with the required tools to run your SAAS like services efficiently. It's simple architecture, accompanied by powerful underlying to afford solid platform for your business.
 
-[![Packagist](https://img.shields.io/packagist/v/rinvex/laravel-subscriptions.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/rinvex/laravel-subscriptions)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/rinvex/laravel-subscriptions.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/rinvex/laravel-subscriptions/)
-[![Travis](https://img.shields.io/travis/rinvex/laravel-subscriptions.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/laravel-subscriptions)
+[![Packagist](https://img.shields.io/packagist/v/maxal/laravel-subscriptions.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/maxal/laravel-subscriptions)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/maxal/laravel-subscriptions.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/maxal/laravel-subscriptions/)
+[![Travis](https://img.shields.io/travis/maxal/laravel-subscriptions.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/maxal/laravel-subscriptions)
 [![StyleCI](https://styleci.io/repos/93313402/shield)](https://styleci.io/repos/93313402)
-[![License](https://img.shields.io/packagist/l/rinvex/laravel-subscriptions.svg?label=License&style=flat-square)](https://github.com/rinvex/laravel-subscriptions/blob/develop/LICENSE)
+[![License](https://img.shields.io/packagist/l/maxal/laravel-subscriptions.svg?label=License&style=flat-square)](https://github.com/maxal/laravel-subscriptions/blob/develop/LICENSE)
 
 
 ## Considerations
@@ -25,17 +21,17 @@
 
 1. Install the package via composer:
     ```shell
-    composer require rinvex/laravel-subscriptions
+    composer require maxal/laravel-subscriptions
     ```
 
 2. Publish resources (migrations and config files):
     ```shell
-    php artisan rinvex:publish:subscriptions
+    php artisan maxal:publish:subscriptions
     ```
 
 3. Execute migrations via the following command:
     ```shell
-    php artisan rinvex:migrate:subscriptions
+    php artisan maxal:migrate:subscriptions
     ```
 
 4. Done!
@@ -45,12 +41,12 @@
 
 ### Add Subscriptions to User model
 
-**Rinvex Subscriptions** has been specially made for Eloquent and simplicity has been taken very serious as in any other Laravel related aspect. To add Subscription functionality to your User model just use the `\Rinvex\Subscriptions\Traits\HasPlanSubscriptions` trait like this:
+**MaxAl Subscriptions** has been specially made for Eloquent and simplicity has been taken very serious as in any other Laravel related aspect. To add Subscription functionality to your User model just use the `\MaxAl\Subscriptions\Traits\HasPlanSubscriptions` trait like this:
 
 ```php
 namespace App\Models;
 
-use Rinvex\Subscriptions\Traits\HasPlanSubscriptions;
+use MaxAl\Subscriptions\Traits\HasPlanSubscriptions;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -66,7 +62,7 @@ That's it, we only have to use that trait in our User model! Now your users may 
 ### Create a Plan
 
 ```php
-$plan = app('rinvex.subscriptions.plan')->create([
+$plan = app('maxal.subscriptions.plan')->create([
     'name' => 'Pro',
     'description' => 'Pro plan',
     'price' => 9.99,
@@ -93,7 +89,7 @@ $plan->features()->saveMany([
 You can query the plan for further details, using the intuitive API as follows:
 
 ```php
-$plan = app('rinvex.subscriptions.plan')->find(1);
+$plan = app('maxal.subscriptions.plan')->find(1);
 
 // Get all plan features                
 $plan->features;
@@ -122,10 +118,10 @@ Say you want to show the value of the feature _pictures_per_listing_ from above.
 $amountOfPictures = $plan->getFeatureBySlug('pictures_per_listing')->value;
 
 // Query the feature itself directly
-$amountOfPictures = app('rinvex.subscriptions.plan_feature')->where('slug', 'pictures_per_listing')->first()->value;
+$amountOfPictures = app('maxal.subscriptions.plan_feature')->where('slug', 'pictures_per_listing')->first()->value;
 
 // Get feature value through the subscription instance
-$amountOfPictures = app('rinvex.subscriptions.plan_subscription')->find(1)->getFeatureValue('pictures_per_listing');
+$amountOfPictures = app('maxal.subscriptions.plan_subscription')->find(1)->getFeatureValue('pictures_per_listing');
 ```
 
 ### Create a Subscription
@@ -134,7 +130,7 @@ You can subscribe a user to a plan by using the `newSubscription()` function ava
 
 ```php
 $user = User::find(1);
-$plan = app('rinvex.subscriptions.plan')->find(1);
+$plan = app('maxal.subscriptions.plan')->find(1);
 
 $user->newPlanSubscription('main', $plan);
 ```
@@ -146,8 +142,8 @@ The first argument passed to `newSubscription` method should be the title of the
 You can change subscription plan easily as follows:
 
 ```php
-$plan = app('rinvex.subscriptions.plan')->find(2);
-$subscription = app('rinvex.subscriptions.plan_subscription')->find(1);
+$plan = app('maxal.subscriptions.plan')->find(2);
+$subscription = app('maxal.subscriptions.plan_subscription')->find(1);
 
 // Change subscription plan
 $subscription->changePlan($plan);
@@ -161,7 +157,7 @@ Plan features are great for fine-tuning subscriptions, you can top-up certain fe
 
 ```php
 // Find plan feature
-$feature = app('rinvex.subscriptions.plan_feature')->where('name', 'listing_duration_days')->first();
+$feature = app('maxal.subscriptions.plan_feature')->where('name', 'listing_duration_days')->first();
 
 // Get feature reset date
 $feature->getResetDate(new \Carbon\Carbon());
@@ -273,34 +269,34 @@ $user->planSubscription('main')->cancel(true);
 
 ```php
 // Get subscriptions by plan
-$subscriptions = app('rinvex.subscriptions.plan_subscription')->byPlanId($plan_id)->get();
+$subscriptions = app('maxal.subscriptions.plan_subscription')->byPlanId($plan_id)->get();
 
 // Get bookings of the given user
 $user = \App\Models\User::find(1);
-$bookingsOfSubscriber = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($user)->get(); 
+$bookingsOfSubscriber = app('maxal.subscriptions.plan_subscription')->ofSubscriber($user)->get(); 
 
 // Get subscriptions with trial ending in 3 days
-$subscriptions = app('rinvex.subscriptions.plan_subscription')->findEndingTrial(3)->get();
+$subscriptions = app('maxal.subscriptions.plan_subscription')->findEndingTrial(3)->get();
 
 // Get subscriptions with ended trial
-$subscriptions = app('rinvex.subscriptions.plan_subscription')->findEndedTrial()->get();
+$subscriptions = app('maxal.subscriptions.plan_subscription')->findEndedTrial()->get();
 
 // Get subscriptions with period ending in 3 days
-$subscriptions = app('rinvex.subscriptions.plan_subscription')->findEndingPeriod(3)->get();
+$subscriptions = app('maxal.subscriptions.plan_subscription')->findEndingPeriod(3)->get();
 
 // Get subscriptions with ended period
-$subscriptions = app('rinvex.subscriptions.plan_subscription')->findEndedPeriod()->get();
+$subscriptions = app('maxal.subscriptions.plan_subscription')->findEndedPeriod()->get();
 ```
 
 ### Models
 
-**Rinvex Subscriptions** uses 4 models:
+**MaxAl Subscriptions** uses 4 models:
 
 ```php
-Rinvex\Subscriptions\Models\Plan;
-Rinvex\Subscriptions\Models\PlanFeature;
-Rinvex\Subscriptions\Models\PlanSubscription;
-Rinvex\Subscriptions\Models\PlanSubscriptionUsage;
+MaxAl\Subscriptions\Models\Plan;
+MaxAl\Subscriptions\Models\PlanFeature;
+MaxAl\Subscriptions\Models\PlanSubscription;
+MaxAl\Subscriptions\Models\PlanSubscriptionUsage;
 ```
 
 
@@ -325,9 +321,9 @@ Refer to the [Changelog](CHANGELOG.md) for a full history of the project.
 
 The following support channels are available at your fingertips:
 
-- [Chat on Slack](https://bit.ly/rinvex-slack)
-- [Help on Email](mailto:help@rinvex.com)
-- [Follow on Twitter](https://twitter.com/rinvex)
+- [Chat on Slack](https://bit.ly/maxal-slack)
+- [Help on Email](mailto:help@maxal.com)
+- [Follow on Twitter](https://twitter.com/maxal)
 
 
 ## Contributing & Protocols
@@ -345,16 +341,16 @@ Bug reports, feature requests, and pull requests are very welcome.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within this project, please send an e-mail to [help@rinvex.com](help@rinvex.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this project, please send an e-mail to [help@maxal.com](help@maxal.com). All security vulnerabilities will be promptly addressed.
 
 
-## About Rinvex
+## About MaxAl
 
-Rinvex is a software solutions startup, specialized in integrated enterprise solutions for SMEs established in Alexandria, Egypt since June 2016. We believe that our drive The Value, The Reach, and The Impact is what differentiates us and unleash the endless possibilities of our philosophy through the power of software. We like to call it Innovation At The Speed Of Life. That’s how we do our share of advancing humanity.
+MaxAl is a software development startup, specialized in integrated enterprise solutions,designing and it support established in Tirana, Albania since March 2018. We believe that our drive The Value, The Reach, and The Impact is what differentiates us and unleash the endless possibilities of our philosophy through the power of software. We like to call it Innovation At The Speed Of Life. That’s how we do our share of advancing humanity.
 
 
 ## License
 
 This software is released under [The MIT License (MIT)](LICENSE).
 
-(c) 2016-2022 Rinvex LLC, Some rights reserved.
+(c) 2018-2022 MaxAl, Some rights reserved.

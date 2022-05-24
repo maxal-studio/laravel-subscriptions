@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Console\Commands;
+namespace MaxAl\Subscriptions\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -13,14 +13,14 @@ class RollbackCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'rinvex:rollback:subscriptions {--f|force : Force the operation to run when in production.}';
+    protected $signature = 'maxal:rollback:subscriptions {--f|force : Force the operation to run when in production.}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Rollback Rinvex Subscriptions Tables.';
+    protected $description = 'Rollback MaxAl Subscriptions Tables.';
 
     /**
      * Execute the console command.
@@ -31,9 +31,9 @@ class RollbackCommand extends Command
     {
         $this->alert($this->description);
 
-        $path = config('rinvex.subscriptions.autoload_migrations') ?
-            'vendor/rinvex/laravel-subscriptions/database/migrations' :
-            'database/migrations/rinvex/laravel-subscriptions';
+        $path = config('maxal.subscriptions.autoload_migrations') ?
+            'vendor/maxal/laravel-subscriptions/database/migrations' :
+            'database/migrations/maxal/laravel-subscriptions';
 
         if (file_exists($path)) {
             $this->call('migrate:reset', [
@@ -41,7 +41,7 @@ class RollbackCommand extends Command
                 '--force' => $this->option('force'),
             ]);
         } else {
-            $this->warn('No migrations found! Consider publish them first: <fg=green>php artisan rinvex:publish:subscriptions</>');
+            $this->warn('No migrations found! Consider publish them first: <fg=green>php artisan maxal:publish:subscriptions</>');
         }
 
         $this->line('');

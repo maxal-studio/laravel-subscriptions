@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Models;
+namespace MaxAl\Subscriptions\Models;
 
 use Carbon\Carbon;
 use Spatie\Sluggable\SlugOptions;
 use Rinvex\Support\Traits\HasSlug;
 use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
-use Rinvex\Subscriptions\Services\Period;
+use MaxAl\Subscriptions\Services\Period;
 use Rinvex\Support\Traits\HasTranslations;
 use Rinvex\Support\Traits\ValidatingTrait;
 use Spatie\EloquentSortable\SortableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Rinvex\Subscriptions\Traits\BelongsToPlan;
+use MaxAl\Subscriptions\Traits\BelongsToPlan;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Rinvex\Subscriptions\Models\PlanFeature.
+ * MaxAl\Subscriptions\Models\PlanFeature.
  *
  * @property int                 $id
  * @property int                 $plan_id
@@ -33,23 +33,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- * @property-read \Rinvex\Subscriptions\Models\Plan                                                             $plan
- * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage[] $usage
+ * @property-read \MaxAl\Subscriptions\Models\Plan                                                             $plan
+ * @property-read \Illuminate\Database\Eloquent\Collection|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage[] $usage
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature byPlanId($planId)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature ordered($direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature wherePlanId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereResettableInterval($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereResettablePeriod($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanFeature whereValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature byPlanId($planId)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature ordered($direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature wherePlanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereResettableInterval($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereResettablePeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanFeature whereValue($value)
  * @mixin \Eloquent
  */
 class PlanFeature extends Model implements Sortable
@@ -138,10 +138,10 @@ class PlanFeature extends Model implements Sortable
      */
     public function __construct(array $attributes = [])
     {
-        $this->setTable(config('rinvex.subscriptions.tables.plan_features'));
+        $this->setTable(config('maxal.subscriptions.tables.plan_features'));
         $this->mergeRules([
-            'plan_id'               => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plans') . ',id',
-            'slug'                  => 'required|alpha_dash|max:150|unique:' . config('rinvex.subscriptions.tables.plan_features') . ',slug',
+            'plan_id'               => 'required|integer|exists:' . config('maxal.subscriptions.tables.plans') . ',id',
+            'slug'                  => 'required|alpha_dash|max:150|unique:' . config('maxal.subscriptions.tables.plan_features') . ',slug',
             'name'                  => 'required|string|strip_tags|max:150',
             'description'           => 'nullable|string|max:32768',
             'value'                 => 'required|string',
@@ -185,7 +185,7 @@ class PlanFeature extends Model implements Sortable
      */
     public function usages(): HasMany
     {
-        return $this->hasMany(config('rinvex.subscriptions.models.plan_subscription_usage'), 'feature_id', 'id');
+        return $this->hasMany(config('maxal.subscriptions.models.plan_subscription_usage'), 'feature_id', 'id');
     }
 
     /**

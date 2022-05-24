@@ -1,11 +1,11 @@
 <?php
 
-namespace Rinvex\Subscriptions\Tests\Unit;
+namespace MaxAl\Subscriptions\Tests\Unit;
 
 use LogicException;
-use Rinvex\Subscriptions\Models\Plan;
-use Rinvex\Subscriptions\Models\PlanSubscription;
-use Rinvex\Subscriptions\Tests\TestCase;
+use MaxAl\Subscriptions\Models\Plan;
+use MaxAl\Subscriptions\Models\PlanSubscription;
+use MaxAl\Subscriptions\Tests\TestCase;
 
 class PlanSubscriptionTest extends TestCase
 {

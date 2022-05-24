@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Traits;
+namespace MaxAl\Subscriptions\Traits;
 
 use Carbon\Carbon;
-use Rinvex\Subscriptions\Models\Plan;
-use Rinvex\Subscriptions\Services\Period;
+use MaxAl\Subscriptions\Models\Plan;
+use MaxAl\Subscriptions\Services\Period;
 use Illuminate\Database\Eloquent\Collection;
-use Rinvex\Subscriptions\Models\PlanSubscription;
+use MaxAl\Subscriptions\Models\PlanSubscription;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasPlanSubscriptions
@@ -45,7 +45,7 @@ trait HasPlanSubscriptions
      */
     public function planSubscriptions(): MorphMany
     {
-        return $this->morphMany(config('rinvex.subscriptions.models.plan_subscription'), 'subscriber', 'subscriber_type', 'subscriber_id');
+        return $this->morphMany(config('maxal.subscriptions.models.plan_subscription'), 'subscriber', 'subscriber_type', 'subscriber_id');
     }
 
     /**
@@ -63,7 +63,7 @@ trait HasPlanSubscriptions
      *
      * @param string $subscriptionSlug
      *
-     * @return \Rinvex\Subscriptions\Models\PlanSubscription|null
+     * @return \MaxAl\Subscriptions\Models\PlanSubscription|null
      */
     public function planSubscription(string $subscriptionSlug): ?PlanSubscription
     {
@@ -79,7 +79,7 @@ trait HasPlanSubscriptions
     {
         $planIds = $this->planSubscriptions->reject->inactive()->pluck('plan_id')->unique();
 
-        return app('rinvex.subscriptions.plan')->whereIn('id', $planIds)->get();
+        return app('maxal.subscriptions.plan')->whereIn('id', $planIds)->get();
     }
 
     /**
@@ -100,10 +100,10 @@ trait HasPlanSubscriptions
      * Subscribe subscriber to a new plan.
      *
      * @param string                            $subscription
-     * @param \Rinvex\Subscriptions\Models\Plan $plan
+     * @param \MaxAl\Subscriptions\Models\Plan $plan
      * @param \Carbon\Carbon|null               $startDate
      *
-     * @return \Rinvex\Subscriptions\Models\PlanSubscription
+     * @return \MaxAl\Subscriptions\Models\PlanSubscription
      */
     public function newPlanSubscription($subscription, Plan $plan, Carbon $startDate = null): PlanSubscription
     {

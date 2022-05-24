@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Providers;
+namespace MaxAl\Subscriptions\Providers;
 
-use Rinvex\Subscriptions\Models\Plan;
+use MaxAl\Subscriptions\Models\Plan;
 use Illuminate\Support\ServiceProvider;
 use Rinvex\Support\Traits\ConsoleTools;
-use Rinvex\Subscriptions\Models\PlanFeature;
-use Rinvex\Subscriptions\Models\PlanSubscription;
-use Rinvex\Subscriptions\Models\PlanSubscriptionUsage;
-use Rinvex\Subscriptions\Console\Commands\MigrateCommand;
-use Rinvex\Subscriptions\Console\Commands\PublishCommand;
-use Rinvex\Subscriptions\Console\Commands\RollbackCommand;
+use MaxAl\Subscriptions\Models\PlanFeature;
+use MaxAl\Subscriptions\Models\PlanSubscription;
+use MaxAl\Subscriptions\Models\PlanSubscriptionUsage;
+use MaxAl\Subscriptions\Console\Commands\MigrateCommand;
+use MaxAl\Subscriptions\Console\Commands\PublishCommand;
+use MaxAl\Subscriptions\Console\Commands\RollbackCommand;
 
 class SubscriptionsServiceProvider extends ServiceProvider
 {
@@ -24,9 +24,9 @@ class SubscriptionsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        MigrateCommand::class => 'command.rinvex.subscriptions.migrate',
-        PublishCommand::class => 'command.rinvex.subscriptions.publish',
-        RollbackCommand::class => 'command.rinvex.subscriptions.rollback',
+        MigrateCommand::class => 'command.maxal.subscriptions.migrate',
+        PublishCommand::class => 'command.maxal.subscriptions.publish',
+        RollbackCommand::class => 'command.maxal.subscriptions.rollback',
     ];
 
     /**
@@ -36,14 +36,14 @@ class SubscriptionsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(realpath(__DIR__ . '/../../config/config.php'), 'rinvex.subscriptions');
+        $this->mergeConfigFrom(realpath(__DIR__ . '/../../config/config.php'), 'maxal.subscriptions');
 
         // Bind eloquent models to IoC container
         $this->registerModels([
-            'rinvex.subscriptions.plan' => Plan::class,
-            'rinvex.subscriptions.plan_feature' => PlanFeature::class,
-            'rinvex.subscriptions.plan_subscription' => PlanSubscription::class,
-            'rinvex.subscriptions.plan_subscription_usage' => PlanSubscriptionUsage::class,
+            'maxal.subscriptions.plan' => Plan::class,
+            'maxal.subscriptions.plan_feature' => PlanFeature::class,
+            'maxal.subscriptions.plan_subscription' => PlanSubscription::class,
+            'maxal.subscriptions.plan_subscription_usage' => PlanSubscriptionUsage::class,
         ]);
 
         // Register console commands
@@ -59,8 +59,8 @@ class SubscriptionsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Publish Resources
-        $this->publishesConfig('rinvex/laravel-subscriptions');
-        $this->publishesMigrations('rinvex/laravel-subscriptions');
-        !$this->autoloadMigrations('rinvex/laravel-subscriptions') || $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->publishesConfig('maxal/laravel-subscriptions');
+        $this->publishesMigrations('maxal/laravel-subscriptions');
+        !$this->autoloadMigrations('maxal/laravel-subscriptions') || $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
     }
 }

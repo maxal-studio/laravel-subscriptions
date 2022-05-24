@@ -1,11 +1,11 @@
 <?php
 
-namespace Rinvex\Subscriptions\Tests;
+namespace MaxAl\Subscriptions\Tests;
 
-use Rinvex\Subscriptions\Models\Plan;
-use Rinvex\Subscriptions\Models\PlanFeature;
-use Rinvex\Subscriptions\Models\PlanSubscription;
-use Rinvex\Subscriptions\Models\PlanSubscriptionUsage;
+use MaxAl\Subscriptions\Models\Plan;
+use MaxAl\Subscriptions\Models\PlanFeature;
+use MaxAl\Subscriptions\Models\PlanSubscription;
+use MaxAl\Subscriptions\Models\PlanSubscriptionUsage;
 
 class ModelHelper
 {

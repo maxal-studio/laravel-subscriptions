@@ -1,6 +1,6 @@
 <?php
 
-namespace Rinvex\Subscriptions\Tests;
+namespace MaxAl\Subscriptions\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -12,7 +12,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
   public $model_helper;
   protected function getPackageProviders($app)
   {
-    return [\Rinvex\Subscriptions\Providers\SubscriptionsServiceProvider::class];
+    return [\MaxAl\Subscriptions\Providers\SubscriptionsServiceProvider::class];
   }
 
   protected function getEnvironmentSetUp($app)

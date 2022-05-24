@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rinvex\Subscriptions\Models;
+namespace MaxAl\Subscriptions\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Rinvex\Subscriptions\Models\PlanSubscriptionUsage.
+ * MaxAl\Subscriptions\Models\PlanSubscriptionUsage.
  *
  * @property int                 $id
  * @property int                 $subscription_id
@@ -23,18 +23,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property \Carbon\Carbon|null $deleted_at
- * @property-read \Rinvex\Subscriptions\Models\PlanFeature      $feature
- * @property-read \Rinvex\Subscriptions\Models\PlanSubscription $subscription
+ * @property-read \MaxAl\Subscriptions\Models\PlanFeature      $feature
+ * @property-read \MaxAl\Subscriptions\Models\PlanSubscription $subscription
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage byFeatureSlug($featureSlug)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereFeatureId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereSubscriptionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereUsed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Subscriptions\Models\PlanSubscriptionUsage whereValidUntil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage byFeatureSlug($featureSlug)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereFeatureId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereSubscriptionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereUsed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\MaxAl\Subscriptions\Models\PlanSubscriptionUsage whereValidUntil($value)
  * @mixin \Eloquent
  */
 class PlanSubscriptionUsage extends Model
@@ -94,10 +94,10 @@ class PlanSubscriptionUsage extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->setTable(config('rinvex.subscriptions.tables.plan_subscription_usage'));
+        $this->setTable(config('maxal.subscriptions.tables.plan_subscription_usage'));
         $this->mergeRules([
-            'subscription_id' => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plan_subscriptions') . ',id',
-            'feature_id' => 'required|integer|exists:' . config('rinvex.subscriptions.tables.plan_features') . ',id',
+            'subscription_id' => 'required|integer|exists:' . config('maxal.subscriptions.tables.plan_subscriptions') . ',id',
+            'feature_id' => 'required|integer|exists:' . config('maxal.subscriptions.tables.plan_features') . ',id',
             'used' => 'required|integer',
             'valid_until' => 'nullable|date',
         ]);
@@ -112,7 +112,7 @@ class PlanSubscriptionUsage extends Model
      */
     public function feature(): BelongsTo
     {
-        return $this->belongsTo(config('rinvex.subscriptions.models.plan_feature'), 'feature_id', 'id', 'feature');
+        return $this->belongsTo(config('maxal.subscriptions.models.plan_feature'), 'feature_id', 'id', 'feature');
     }
 
     /**
@@ -122,7 +122,7 @@ class PlanSubscriptionUsage extends Model
      */
     public function subscription(): BelongsTo
     {
-        return $this->belongsTo(config('rinvex.subscriptions.models.plan_subscription'), 'subscription_id', 'id', 'subscription');
+        return $this->belongsTo(config('maxal.subscriptions.models.plan_subscription'), 'subscription_id', 'id', 'subscription');
     }
 
     /**
@@ -135,7 +135,7 @@ class PlanSubscriptionUsage extends Model
      */
     public function scopeByFeatureSlug(Builder $builder, string $featureSlug): Builder
     {
-        $feature = app('rinvex.subscriptions.plan_feature')->where('slug', $featureSlug)->first();
+        $feature = app('maxal.subscriptions.plan_feature')->where('slug', $featureSlug)->first();
 
         return $builder->where('feature_id', $feature ? $feature->getKey() : null);
     }

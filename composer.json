@@ -1,6 +1,6 @@
 {
-  "name": "rinvex/laravel-subscriptions",
-  "description": "Rinvex Subscriptions is a flexible plans and subscription management system for Laravel, with the required tools to run your SAAS like services efficiently. It's simple architecture, accompanied by powerful underlying to afford solid platform for your business.",
+  "name": "maxal/laravel-subscriptions",
+  "description": "MaxAl Subscriptions is a flexible plans and subscription management system for Laravel, with the required tools to run your SAAS like services efficiently. It's simple architecture, accompanied by powerful underlying to afford solid platform for your business.",
   "type": "library",
   "keywords": [
     "plan",
@@ -12,18 +12,18 @@
     "subscription"
   ],
   "license": "MIT",
-  "homepage": "https://rinvex.com",
+  "homepage": "https://maxal.com",
   "support": {
-    "email": "help@rinvex.com",
-    "issues": "https://github.com/rinvex/laravel-subscriptions/issues",
-    "source": "https://github.com/rinvex/laravel-subscriptions",
-    "docs": "https://github.com/rinvex/laravel-subscriptions/blob/master/README.md"
+    "email": "help@maxal.com",
+    "issues": "https://github.com/maxal/laravel-subscriptions/issues",
+    "source": "https://github.com/maxal/laravel-subscriptions",
+    "docs": "https://github.com/maxal/laravel-subscriptions/blob/master/README.md"
   },
   "authors": [
     {
-      "name": "Rinvex LLC",
-      "homepage": "https://rinvex.com",
-      "email": "help@rinvex.com"
+      "name": "MaxAl",
+      "homepage": "https://maxal.com",
+      "email": "help@maxal.com"
     },
     {
       "name": "Abdelrahman Omran",
@@ -33,7 +33,7 @@
     },
     {
       "name": "The Generous Laravel Community",
-      "homepage": "https://github.com/rinvex/laravel-subscriptions/contributors"
+      "homepage": "https://github.com/maxal/laravel-subscriptions/contributors"
     }
   ],
   "require": {
@@ -53,12 +53,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Rinvex\\Subscriptions\\": "src"
+      "MaxAl\\Subscriptions\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Rinvex\\Subscriptions\\Tests\\": "tests"
+      "MaxAl\\Subscriptions\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -72,7 +72,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Rinvex\\Subscriptions\\Providers\\SubscriptionsServiceProvider"
+        "MaxAl\\Subscriptions\\Providers\\SubscriptionsServiceProvider"
       ]
     }
   },

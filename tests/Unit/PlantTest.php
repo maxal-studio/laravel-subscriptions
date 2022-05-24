@@ -1,9 +1,9 @@
 <?php
 
-namespace Rinvex\Subscriptions\Tests\Unit;
+namespace MaxAl\Subscriptions\Tests\Unit;
 
-use Rinvex\Subscriptions\Models\Plan;
-use Rinvex\Subscriptions\Tests\TestCase;
+use MaxAl\Subscriptions\Models\Plan;
+use MaxAl\Subscriptions\Tests\TestCase;
 
 class PlantTest extends TestCase
 {

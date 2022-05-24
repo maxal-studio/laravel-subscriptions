@@ -14,7 +14,7 @@ class CreatePlanSubscriptionsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('rinvex.subscriptions.tables.plan_subscriptions'), function (Blueprint $table) {
+        Schema::create(config('maxal.subscriptions.tables.plan_subscriptions'), function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('subscriber');
             $table->integer('plan_id')->unsigned();
@@ -32,8 +32,8 @@ class CreatePlanSubscriptionsTable extends Migration
 
             // Indexes
             $table->unique('slug');
-            $table->foreign('plan_id')->references('id')->on(config('rinvex.subscriptions.tables.plans'))
-                  ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('plan_id')->references('id')->on(config('maxal.subscriptions.tables.plans'))
+                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -44,6 +44,6 @@ class CreatePlanSubscriptionsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('rinvex.subscriptions.tables.plan_subscriptions'));
+        Schema::dropIfExists(config('maxal.subscriptions.tables.plan_subscriptions'));
     }
 }

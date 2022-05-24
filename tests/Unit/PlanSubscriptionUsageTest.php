@@ -1,11 +1,11 @@
 <?php
 
-namespace Rinvex\Subscriptions\Tests\Unit;
+namespace MaxAl\Subscriptions\Tests\Unit;
 
-use Rinvex\Subscriptions\Models\PlanFeature;
-use Rinvex\Subscriptions\Models\PlanSubscription;
-use Rinvex\Subscriptions\Models\PlanSubscriptionUsage;
-use Rinvex\Subscriptions\Tests\TestCase;
+use MaxAl\Subscriptions\Models\PlanFeature;
+use MaxAl\Subscriptions\Models\PlanSubscription;
+use MaxAl\Subscriptions\Models\PlanSubscriptionUsage;
+use MaxAl\Subscriptions\Tests\TestCase;
 
 class PlanSubscriptionUsageTest extends TestCase
 {
