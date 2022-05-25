@@ -76,7 +76,8 @@ class User extends Authenticatable
         return parent::morphMany($related, $name, $type = null, $id = null, $localKey = null);
     }
 }
-   
+```
+
 ### Create a Plan
 
 ```php
@@ -101,7 +102,6 @@ $plan->features()->saveMany([
     new PlanFeature(['name' => 'listing_title_bold', 'value' => 'Y', 'sort_order' => 15])
 ]);
 ```
-
 ### Get Plan Details
 
 You can query the plan for further details, using the intuitive API as follows:
