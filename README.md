@@ -57,8 +57,26 @@ class User extends Authenticatable
 
 That's it, we only have to use that trait in our User model! Now your users may subscribe to plans.
 
-> **Note:** you can use `HasPlanSubscriptions` trait on any subscriber model, it doesn't have to be the user model, in fact any model will do.
+> **Note:** you can use `HasPlanSubscriptions` trait on any subscriber model, it doesn't have to be the user model, in fact any model will do after.
 
+>**Note:** after adding the HasPlanSubscriptions trait add this to the model
+
+```php
+namespace App\Models;
+
+use MaxAl\Subscriptions\Traits\HasPlanSubscriptions;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasPlanSubscriptions;
+
+     public function morphMany($related, $name, $type = null, $id = null, $localKey = null)
+    {
+        return parent::morphMany($related, $name, $type = null, $id = null, $localKey = null);
+    }
+}
+   
 ### Create a Plan
 
 ```php
