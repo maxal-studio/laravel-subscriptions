@@ -18,9 +18,25 @@ class PlanSubscriptionUsageTest extends TestCase
     $plan = $this->model_helper->plan_create();
     $subscription =  $this->model_helper->plan_subscription_create($plan->id);
     $feature = $this->model_helper->plan_feature_create($plan->id);
-    $this->model_helper->plan_subscription_usage_create($subscription->id, $feature->id);
+    $usage = $this->model_helper->plan_subscription_usage_create($subscription->id, $feature->id);
 
+    $this->assertNotNull($usage);
     $this->assertEquals(1, PlanSubscriptionUsage::count());
+  }
+
+  /**
+   * @test
+   */
+  public function plan_subscription_usage_delete()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription =  $this->model_helper->plan_subscription_create($plan->id);
+    $feature = $this->model_helper->plan_feature_create($plan->id);
+    $usage = $this->model_helper->plan_subscription_usage_create($subscription->id, $feature->id);
+
+    $usage->delete();
+
+    $this->assertEquals(0, PlanSubscriptionUsage::count());
   }
 
   /**

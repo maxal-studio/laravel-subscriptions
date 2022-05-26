@@ -16,8 +16,21 @@ class PlanSubscriptionTest extends TestCase
   public function subscription_creation()
   {
     $plan = $this->model_helper->plan_create();
-    $this->model_helper->plan_subscription_create($plan->id);
+    $subscription =  $this->model_helper->plan_subscription_create($plan->id);
+    $this->assertNotNull($subscription);
     $this->assertEquals(1, PlanSubscription::count());
+  }
+
+
+  /**
+   * @test
+   */
+  public function subscription_delete()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription = $this->model_helper->plan_subscription_create($plan->id);
+    $subscription->delete();
+    $this->assertEquals(0, PlanSubscription::count());
   }
 
 

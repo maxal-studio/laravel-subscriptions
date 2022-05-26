@@ -14,8 +14,20 @@ class PlantFeatureTest extends TestCase
   public function feature_creation()
   {
     $plan = $this->model_helper->plan_create();
-    $this->model_helper->plan_feature_create($plan->id);
+    $feature = $this->model_helper->plan_feature_create($plan->id);
+    $this->assertNotNull($feature);
     $this->assertEquals(1, PlanFeature::count());
+  }
+
+  /**
+   * @test
+   */
+  public function feature_delete()
+  {
+    $plan = $this->model_helper->plan_create();
+    $feature = $this->model_helper->plan_feature_create($plan->id);
+    $feature->delete();
+    $this->assertEquals(0, PlanFeature::count());
   }
 
 

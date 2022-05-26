@@ -17,6 +17,16 @@ class PlantTest extends TestCase
     $this->assertEquals(1, Plan::count());
   }
 
+  /**
+   * @test
+   */
+  public function plan_delete()
+  {
+    $plan = $this->model_helper->plan_create();
+    $plan->delete();
+    $this->assertEquals(0, Plan::count());
+  }
+
   /** @test */
   public function a_plan_has_plan_features()
   {
