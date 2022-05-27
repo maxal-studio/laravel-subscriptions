@@ -340,7 +340,7 @@ Refer to the [Changelog](CHANGELOG.md) for a full history of the project.
 The following support channels are available at your fingertips:
 
 - [Chat on Slack](https://bit.ly/maxal-slack)
-- [Help on Email](mailto:help@maxal.com)
+- [Help on Email](mailto:info@max.al)
 - [Follow on Twitter](https://twitter.com/maxal)
 
 
@@ -359,7 +359,7 @@ Bug reports, feature requests, and pull requests are very welcome.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within this project, please send an e-mail to [help@maxal.com](help@maxal.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this project, please send an e-mail to [info@max.al](info@max.al). All security vulnerabilities will be promptly addressed.
 
 
 ## About MaxAl

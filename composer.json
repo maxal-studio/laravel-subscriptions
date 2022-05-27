@@ -14,7 +14,7 @@
   "license": "MIT",
   "homepage": "https://maxal.com",
   "support": {
-    "email": "help@maxal.com",
+    "email": "info@max.al",
     "issues": "https://github.com/maxal/laravel-subscriptions/issues",
     "source": "https://github.com/maxal/laravel-subscriptions",
     "docs": "https://github.com/maxal/laravel-subscriptions/blob/master/README.md"
@@ -23,7 +23,7 @@
     {
       "name": "MaxAl",
       "homepage": "https://maxal.com",
-      "email": "help@maxal.com"
+      "email": "info@max.al"
     },
     {
       "name": "Abdelrahman Omran",
