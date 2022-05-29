@@ -82,6 +82,16 @@ class PlantTest extends TestCase
   /**
    * @test
    */
+  public function plan_has_grace()
+  {
+    $plan = $this->model_helper->plan_create();
+    //Plan has trial
+    $this->assertTrue($plan->hasGrace());
+  }
+
+  /**
+   * @test
+   */
   public function activate_plan()
   {
     $plan = $this->model_helper->plan_create();

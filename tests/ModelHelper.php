@@ -82,7 +82,7 @@ class ModelHelper
         'slug' => 'something',
         'name' => 'somthing',
         'description' => 'something',
-        'value' => 'something',
+        'value' => 10,
         'resettable_period' => 1,
         'resettable_interval' => 'month',
         'sort_order' => 1,

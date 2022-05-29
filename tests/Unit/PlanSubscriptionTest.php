@@ -157,4 +157,78 @@ class PlanSubscriptionTest extends TestCase
     $this->expectException(LogicException::class);
     $subscription = $subscription->renew();
   }
+
+  /**
+   * @test
+   */
+  public function find_ending_trial()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription = $this->model_helper->plan_subscription_ended_create($plan->id);
+    $ending_trial = $subscription->findEndingTrial(10)->count();
+
+    $this->assertEquals(1, $ending_trial);
+  }
+
+  /**
+   * @test
+   */
+  public function find_ended_trial()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription = $this->model_helper->plan_subscription_inactive_create($plan->id);
+    $ended_trial = $subscription->findEndedTrial()->count();
+
+    $this->assertEquals(1, $ended_trial);
+  }
+
+  /**
+   * @test
+   */
+  public function find_ending_period()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription = $this->model_helper->plan_subscription_create($plan->id);
+    $ending_period = $subscription->findEndingPeriod(10)->count();
+
+    $this->assertEquals(1, $ending_period);
+  }
+
+  /**
+   * @test
+   */
+  public function find_ended_period()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription = $this->model_helper->plan_subscription_inactive_create($plan->id);
+    $ended_period = $subscription->findEndedPeriod()->count();
+
+    $this->assertEquals(1, $ended_period);
+  }
+
+  /**
+   * @test
+   */
+  public function find_active()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription = $this->model_helper->plan_subscription_create($plan->id);
+    $active = $subscription->findActive()->count();
+
+    $this->assertEquals(1, $active);
+  }
+
+  /**
+   * @test
+   */
+  public function get_feature_value()
+  {
+    $plan = $this->model_helper->plan_create();
+    $subscription = $this->model_helper->plan_subscription_create($plan->id);
+    $feature = $this->model_helper->plan_feature_create($plan->id);
+
+    $value =  $subscription->getFeatureValue('something');
+
+    $this->assertEquals(10, $value);
+  }
 }
