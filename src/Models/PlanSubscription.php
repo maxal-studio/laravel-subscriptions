@@ -312,6 +312,30 @@ class PlanSubscription extends Model
     }
 
     /**
+     * Change subscription plan without clearing the usages
+     *
+     * @param \MaxAl\Subscriptions\Models\Plan $plan
+     *
+     * @return $this
+     */
+    public function changePlanKeepUsage(Plan $plan)
+    {
+        // If plans does not have the same billing frequency
+        // (e.g., invoice_interval and invoice_period) we will update
+        // the billing dates starting today, and since we are basically creating
+        // a new billing cycle, the usage data will be cleared.
+        if ($this->plan->invoice_interval !== $plan->invoice_interval || $this->plan->invoice_period !== $plan->invoice_period) {
+            $this->setNewPeriod($plan->invoice_interval, $plan->invoice_period);
+        }
+
+        // Attach new plan to subscription
+        $this->plan_id = $plan->getKey();
+        $this->save();
+
+        return $this;
+    }
+
+    /**
      * Renew subscription period.
      *
      * @throws \LogicException
