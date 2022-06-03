@@ -597,4 +597,21 @@ class PlanSubscription extends Model
 
         return $feature->value ?? null;
     }
+
+    /**
+     * Get feature value.
+     *
+     * @param string $featureSlug
+     *
+     * @return mixed
+     */
+    public function getFeature(string $featureSlug)
+    {
+        $feature = $this->plan->features()
+            ->where('slug', $featureSlug)
+            ->orWhere('slug', 'LIKE', $featureSlug . '-%')
+            ->first();
+
+        return $feature;
+    }
 }
