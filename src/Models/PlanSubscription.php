@@ -612,6 +612,7 @@ class PlanSubscription extends Model
         $feature = $this->plan->features()
             ->where('slug', $featureSlug)
             ->orWhere('slug', 'LIKE', $featureSlug . '-%')
+            ->where('plan_id', $this->plan->id)
             ->first();
 
         return $feature;
