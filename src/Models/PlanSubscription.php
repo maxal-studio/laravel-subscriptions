@@ -573,14 +573,13 @@ class PlanSubscription extends Model
             return true;
         }
 
+        if (is_null($usage)) {
+            return true;
+        }
         // If the feature value is zero, let's return false since
         // there's no uses available. (useful to disable countable features)
         if ($usage->expired() || is_null($featureValue) || $featureValue === '0' || $featureValue === 'false') {
             return false;
-        }
-
-        if (is_null($usage)) {
-            return true;
         }
 
         // Check for available uses
