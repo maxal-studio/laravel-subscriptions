@@ -365,6 +365,31 @@ class PlanSubscription extends Model
     }
 
     /**
+     * Renew subscription period.
+     *
+     * @throws \LogicException
+     *
+     * @return $this
+     */
+    public function renewWithoutClearingUsage()
+    {
+        if ($this->ended() && $this->canceled()) {
+            throw new LogicException('Unable to renew canceled ended subscription.');
+        }
+
+        $subscription = $this;
+
+        DB::transaction(function () use ($subscription) {
+            // Renew period
+            $subscription->setNewPeriod();
+            $subscription->canceled_at = null;
+            $subscription->save();
+        });
+
+        return $this;
+    }
+
+    /**
      * Get bookings of the given subscriber.
      *
      * @param \Illuminate\Database\Eloquent\Builder $builder
