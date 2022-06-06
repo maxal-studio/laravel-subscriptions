@@ -579,6 +579,10 @@ class PlanSubscription extends Model
             return false;
         }
 
+        if (is_null($usage)) {
+            return true;
+        }
+
         // Check for available uses
         return $this->getFeatureRemainings($featureSlug) > 0;
     }
