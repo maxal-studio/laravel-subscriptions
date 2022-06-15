@@ -324,7 +324,7 @@ class PlanSubscription extends Model
         // (e.g., invoice_interval and invoice_period) we will update
         // the billing dates starting today, and since we are basically creating
         // a new billing cycle, the usage data will be cleared.
-        if ($this->plan->invoice_interval !== $plan->invoice_interval || $this->plan->invoice_period !== $plan->invoice_period || $this->plan->isFree()) {
+        if ($this->plan->invoice_interval !== $plan->invoice_interval || $this->plan->invoice_period !== $plan->invoice_period || $this->plan->isFree() || $plan->isFree()) {
             $this->setNewPeriod($plan->invoice_interval, $plan->invoice_period);
         }
 
