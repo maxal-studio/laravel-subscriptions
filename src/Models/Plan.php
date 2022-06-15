@@ -309,4 +309,18 @@ class Plan extends Model implements Sortable
 
         return $this;
     }
+
+    /**
+     * Get plan feature by the given slug.
+     *
+     * @param string $featureSlug
+     *
+     * @return \MaxAl\Subscriptions\Models\PlanFeature|null
+     */
+    public function getFeature(string $featureSlug): ?PlanFeature
+    {
+        return $this->features()
+            ->where('slug', 'LIKE', $featureSlug . '%')
+            ->first();
+    }
 }
