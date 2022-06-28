@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string              $slug
  * @property array               $name
  * @property array               $description
+ * @property array               $incentive_text
  * @property bool                $is_active
  * @property float               $price
  * @property float               $signup_fee
@@ -84,6 +85,7 @@ class Plan extends Model implements Sortable
         'slug',
         'name',
         'description',
+        'incentive_text',
         'is_active',
         'price',
         'signup_fee',
@@ -106,6 +108,7 @@ class Plan extends Model implements Sortable
      */
     protected $casts = [
         'slug'                      => 'string',
+        'incentive_text'            => 'string',
         'is_active'                 => 'boolean',
         'price'                     => 'float',
         'signup_fee'                => 'float',
@@ -140,6 +143,7 @@ class Plan extends Model implements Sortable
     public $translatable = [
         'name',
         'description',
+        'incentive_text',
     ];
 
     /**
@@ -178,6 +182,7 @@ class Plan extends Model implements Sortable
             'slug'                      => 'required|alpha_dash|max:150|unique:' . config('maxal.subscriptions.tables.plans') . ',slug',
             'name'                      => 'required|string|strip_tags|max:150',
             'description'               => 'nullable|string|max:32768',
+            'incentive_text'            => 'nullable|string|max:32768',
             'is_active'                 => 'sometimes|boolean',
             'price'                     => 'required|numeric',
             'signup_fee'                => 'required|numeric',
