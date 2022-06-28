@@ -14,7 +14,7 @@ class AddFieldToPlansTable extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('maxal.subscriptions.tables.plans'), function (Blueprint $table) {
+        Schema::table(config('maxal.subscriptions.tables.plans'), function (Blueprint $table) {
             // Columns
             $table->json('incentive_text')->nullable();
         });
@@ -27,7 +27,7 @@ class AddFieldToPlansTable extends Migration
      */
     public function down(): void
     {
-        Schema::create(config('maxal.subscriptions.tables.plans'), function (Blueprint $table) {
+        Schema::table(config('maxal.subscriptions.tables.plans'), function (Blueprint $table) {
             // Columns
             $table->dropColumn('incentive_text');
         });
