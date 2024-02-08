@@ -140,6 +140,7 @@ class Plan extends Model implements Sortable
     public $translatable = [
         'name',
         'description',
+        'incentive_text'
     ];
 
     /**
