@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](CONTRIBUTING.md).
 
+## [v7.0.1] - 2024-02-24
+
+- Fix: Registered models into the app container as aliases
+
 ## [v7.0.0] - 2024-02-08
 
 - Update composer dependencies to Laravel v10
