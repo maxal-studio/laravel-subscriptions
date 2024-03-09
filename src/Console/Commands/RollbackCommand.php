@@ -33,7 +33,7 @@ class RollbackCommand extends Command
 
         $path = config('maxal.subscriptions.autoload_migrations') ?
             'vendor/maxal/laravel-subscriptions/database/migrations' :
-            'database/migrations/maxal/laravel-subscriptions';
+            'database/migrations/laravel-subscriptions';
 
         if (file_exists($path)) {
             $this->call('migrate:reset', [

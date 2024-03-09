@@ -45,11 +45,11 @@ class SubscriptionsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../../config/config.php' => $this->app->configPath('maxal/subscriptions.php'),
-            ], 'config');
+            ], 'maxal-subscriptions-config');
 
             $this->publishes([
                 __DIR__ . '/../../database/migrations' => $this->app->databasePath('migrations'),
-            ], 'migrations');
+            ], 'maxal-subscriptions-migrations');
             $this->commands([
                 MigrateCommand::class,
                 PublishCommand::class,

@@ -10,32 +10,32 @@
 [![StyleCI](https://styleci.io/repos/93313402/shield)](https://styleci.io/repos/93313402)
 [![License](https://img.shields.io/packagist/l/maxal/laravel-subscriptions.svg?label=License&style=flat-square)](https://github.com/maxal/laravel-subscriptions/blob/develop/LICENSE)
 
-
 ## Considerations
 
 - Payments are out of scope for this package.
 - You may want to extend some of the core models, in case you need to override the logic behind some helper methods like `renew()`, `cancel()` etc. E.g.: when cancelling a subscription you may want to also cancel the recurring payment attached.
 
-
 ## Installation
 
 1. Install the package via composer:
-    ```shell
-    composer require maxal/laravel-subscriptions
-    ```
+
+   ```shell
+   composer require maxal/laravel-subscriptions
+   ```
 
 2. Publish resources (migrations and config files):
-    ```shell
-    php artisan maxal:publish:subscriptions
-    ```
+
+   ```shell
+   php artisan maxal:publish:subscriptions
+   ```
 
 3. Execute migrations via the following command:
-    ```shell
-    php artisan maxal:migrate:subscriptions
-    ```
+
+   ```shell
+   php artisan maxal:migrate:subscriptions
+   ```
 
 4. Done!
-
 
 ## Usage
 
@@ -59,7 +59,7 @@ That's it, we only have to use that trait in our User model! Now your users may 
 
 > **Note:** you can use `HasPlanSubscriptions` trait on any subscriber model, it doesn't have to be the user model, in fact any model will do after.
 
->**Note:** after adding the HasPlanSubscriptions trait add this to the model
+> **Note:** after adding the HasPlanSubscriptions trait add this to the model
 
 ```php
 namespace App\Models;
@@ -84,6 +84,7 @@ class User extends Authenticatable
 $plan = app('maxal.subscriptions.plan')->create([
     'name' => 'Pro',
     'description' => 'Pro plan',
+    'incentive_text' => '-10 %',
     'price' => 9.99,
     'signup_fee' => 1.99,
     'invoice_period' => 1,
@@ -102,6 +103,7 @@ $plan->features()->saveMany([
     new PlanFeature(['name' => 'listing_title_bold', 'value' => 'Y', 'sort_order' => 15])
 ]);
 ```
+
 ### Get Plan Details
 
 You can query the plan for further details, using the intuitive API as follows:
@@ -109,7 +111,7 @@ You can query the plan for further details, using the intuitive API as follows:
 ```php
 $plan = app('maxal.subscriptions.plan')->find(1);
 
-// Get all plan features                
+// Get all plan features
 $plan->features;
 
 // Get all plan subscriptions
@@ -291,7 +293,7 @@ $subscriptions = app('maxal.subscriptions.plan_subscription')->byPlanId($plan_id
 
 // Get bookings of the given user
 $user = \App\Models\User::find(1);
-$bookingsOfSubscriber = app('maxal.subscriptions.plan_subscription')->ofSubscriber($user)->get(); 
+$bookingsOfSubscriber = app('maxal.subscriptions.plan_subscription')->ofSubscriber($user)->get();
 
 // Get subscriptions with trial ending in 3 days
 $subscriptions = app('maxal.subscriptions.plan_subscription')->findEndingTrial(3)->get();
@@ -317,7 +319,6 @@ MaxAl\Subscriptions\Models\PlanSubscription;
 MaxAl\Subscriptions\Models\PlanSubscriptionUsage;
 ```
 
-
 ## Roadmap
 
 **Looking for contributors!**
@@ -326,14 +327,13 @@ The following are a set of limitations to be improved, or feature requests that'
 
 - [ ] Allow paying for multiple occurrences of the same plan (i.e. monthly plan, user can pay for 6 months of that plan) (#64)
 - [ ] Plan prorate fields in database isn't utilized, this should be implemented to consolidate extension dates, and prices (#68)
-- [ ] Change *features* to be in a many-to-many relationship with plans. Multiple plans can have the same feature, and many plans can have many features as well (#101)
+- [ ] Change _features_ to be in a many-to-many relationship with plans. Multiple plans can have the same feature, and many plans can have many features as well (#101)
 - [ ] Plan subscription timezone field in database isn't utilized, this should be implemented to respect timezone on date calculations (i.e. starts_at, ends_at, trial_ends_at) (#78)
 - [ ] Separate trial feature from the subscription periods and adjust subscriptions accordingly. Users should be able to have a trial period without having a subscription at all (#67)
 
 ## Changelog
 
 Refer to the [Changelog](CHANGELOG.md) for a full history of the project.
-
 
 ## Support
 
@@ -342,7 +342,6 @@ The following support channels are available at your fingertips:
 - [Chat on Slack](https://bit.ly/maxal-slack)
 - [Help on Email](mailto:info@max.al)
 - [Follow on Twitter](https://twitter.com/maxal)
-
 
 ## Contributing & Protocols
 
@@ -356,16 +355,13 @@ Bug reports, feature requests, and pull requests are very welcome.
 - [Feature Requests](CONTRIBUTING.md#feature-requests)
 - [Git Flow](CONTRIBUTING.md#git-flow)
 
-
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within this project, please send an e-mail to [info@max.al](info@max.al). All security vulnerabilities will be promptly addressed.
 
-
 ## About MaxAl
 
 MaxAl is a software development startup, specialized in integrated enterprise solutions,designing and it support established in Tirana, Albania since March 2018. We believe that our drive The Value, The Reach, and The Impact is what differentiates us and unleash the endless possibilities of our philosophy through the power of software. We like to call it Innovation At The Speed Of Life. That’s how we do our share of advancing humanity.
-
 
 ## License
 

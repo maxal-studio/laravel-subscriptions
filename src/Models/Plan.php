@@ -84,6 +84,7 @@ class Plan extends Model implements Sortable
         'slug',
         'name',
         'description',
+        'incentive_text',
         'is_active',
         'price',
         'signup_fee',

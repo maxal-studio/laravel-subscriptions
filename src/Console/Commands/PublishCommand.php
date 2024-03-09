@@ -31,8 +31,8 @@ class PublishCommand extends Command
     {
         $this->alert($this->description);
 
-        collect($this->option('resource') ?: ['config', 'migrations'])->each(function ($resource) {
-            $this->call('vendor:publish', ['--tag' => "maxal/subscriptions::{$resource}", '--force' => $this->option('force')]);
+        collect($this->option('resource') ?: ['maxal-subscriptions-config', 'maxal-subscriptions-migrations'])->each(function ($resource) {
+            $this->call('vendor:publish', ['--tag' => "{$resource}", '--force' => $this->option('force')]);
         });
 
         $this->line('');

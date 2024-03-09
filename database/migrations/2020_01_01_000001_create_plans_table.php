@@ -19,6 +19,7 @@ class CreatePlansTable extends Migration
             $table->string('slug');
             $table->json('name');
             $table->json('description')->nullable();
+            $table->json('incentive_text')->nullable();
             $table->boolean('is_active')->default(true);
             $table->decimal('price')->default('0.00');
             $table->decimal('signup_fee')->default('0.00');
